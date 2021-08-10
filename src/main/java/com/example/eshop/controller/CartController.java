@@ -1,9 +1,7 @@
-package com.example.eshop.data.controller;
+package com.example.eshop.controller;
 
 import com.example.eshop.data.entity.Cart;
-import com.example.eshop.data.entity.User;
-import com.example.eshop.data.repository.CartRepository;
-import com.example.eshop.data.repository.UserRepository;
+import com.example.eshop.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

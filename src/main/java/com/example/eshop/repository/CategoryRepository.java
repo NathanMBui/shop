@@ -1,4 +1,4 @@
-package com.example.eshop.data.repository;
+package com.example.eshop.repository;
 
 import com.example.eshop.data.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
