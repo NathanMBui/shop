@@ -3,13 +3,6 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Gradle Imported" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.20/18bcea7d5df4d49227b4a0743a536208ce4825bb/lombok-1.18.20.jar" />
-        </processorPath>
-        <module name="shop.main" />
-      </profile>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -17,7 +10,7 @@
         <module name="shop" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="14">
+    <bytecodeTargetLevel target="1.6">
       <module name="eshop" target="11" />
       <module name="shop" target="11" />
     </bytecodeTargetLevel>

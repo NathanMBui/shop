@@ -18,7 +18,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
-    @OneToMany @JoinColumn(name = "user_id")
+    @OneToOne @JoinColumn(name = "user_id")
     User user;
 
     @OneToOne @JoinColumn(name = "order_id")
