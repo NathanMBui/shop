@@ -3,7 +3,6 @@ package com.example.eshop.data.entity;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,7 +18,7 @@ public class Transaction {
     long id;
 
     @OneToOne @JoinColumn(name = "user_id")
-    User user;
+    UserEntity user;
 
     @OneToOne @JoinColumn(name = "order_id")
     Order order;

@@ -1,10 +1,7 @@
 package com.example.eshop.controller;
 
-import com.example.eshop.aspect.Loggable;
 import com.example.eshop.data.dto.UserDTO;
-import com.example.eshop.data.entity.User;
 import com.example.eshop.repository.ProductRepository;
-import com.example.eshop.repository.UserRepository;
 import com.example.eshop.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +23,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    ProductRepository productRepository;
-
     @GetMapping
     public List<UserDTO> getUsers() {
         return userService.getUsers();
@@ -36,11 +30,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserDTO getUser(@PathVariable("id") long id) {
-        Optional<UserDTO> user = userService.getUser(id);
-        if (user.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
-        } else {
-            return user.get();
-        }
+        return userService.getUserById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found"));
     }
 }

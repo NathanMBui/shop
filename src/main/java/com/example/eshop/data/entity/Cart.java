@@ -21,7 +21,7 @@ public class Cart {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    User user;
+    UserEntity user;
 
     long sessionId;
     String content;

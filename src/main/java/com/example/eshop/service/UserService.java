@@ -25,7 +25,8 @@ public class UserService {
     }
 
     @Loggable
-    public Optional<UserDTO> getUser(long id) {
-        return UserDTO.ofNullable(userRepository.findById(id));
+    public Optional<UserDTO> getUserById(long id) {
+        return UserDTO.fromEntity(userRepository.findById(id));
     }
+
 }

@@ -1,12 +1,18 @@
 package com.example.eshop.data.dto;
 
-import com.example.eshop.data.entity.User;
+import com.example.eshop.data.entity.UserEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.Optional;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDTO {
     private long id;
     private String firstName;
@@ -22,7 +28,7 @@ public class UserDTO {
     private String intro;
     private String profile;
 
-    public UserDTO(User user) {
+    public UserDTO(UserEntity user) {
         this.id = user.getId();
         this.firstName = user.getFirstName();
         this.middleName = user.getMiddleName();
@@ -38,7 +44,7 @@ public class UserDTO {
         this.profile = user.getProfile();
     }
 
-    public static Optional<UserDTO> ofNullable(Optional<User> optionalUser) {
+    public static Optional<UserDTO> fromEntity(Optional<UserEntity> optionalUser) {
         if (optionalUser.isEmpty()) {
             return Optional.empty();
         } else {

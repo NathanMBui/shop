@@ -1,15 +1,20 @@
 package com.example.eshop.data.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(schema = "shop")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -24,6 +29,7 @@ public class User {
     private boolean isAdmin;
     @Column(name = "vendor")
     private boolean isVendor;
+    @CreatedDate
     private Date registeredDate;
     private Date lastLogin;
     private String intro;

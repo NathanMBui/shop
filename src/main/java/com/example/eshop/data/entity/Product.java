@@ -3,9 +3,9 @@ package com.example.eshop.data.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -25,7 +25,7 @@ public class Product {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    User user;
+    UserEntity user;
     String title;
     String metaTitle;
     String content;
@@ -38,7 +38,9 @@ public class Product {
     int quantity;
     boolean visible;
     Date publishedDate;
+    @CreatedDate
     Date createdDate;
+    @LastModifiedDate
     Date updatedDate;
     Date startDate;
     Date endDate;
