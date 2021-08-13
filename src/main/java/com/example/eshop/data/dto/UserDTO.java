@@ -44,7 +44,7 @@ public class UserDTO {
         this.profile = user.getProfile();
     }
 
-    public static Optional<UserDTO> fromEntity(Optional<UserEntity> optionalUser) {
+    public static Optional<UserDTO> fromOptional(Optional<UserEntity> optionalUser) {
         if (optionalUser.isEmpty()) {
             return Optional.empty();
         } else {

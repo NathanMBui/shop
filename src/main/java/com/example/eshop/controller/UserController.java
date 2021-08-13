@@ -5,11 +5,10 @@ import com.example.eshop.repository.ProductRepository;
 import com.example.eshop.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -23,9 +22,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public List<UserDTO> getUsers() {
-        return userService.getUsers();
+//    @GetMapping
+//    public List<UserDTO> getUsers() {
+//        return userService.getUsers();
+//    }
+
+    @GetMapping("")
+    Page<UserDTO> getUsersPaginate(Pageable pageable) {
+        return userService.getUsers(pageable);
+    }
+
+    @GetMapping("/search")
+    public List<UserDTO> searchUsers(@RequestParam(required = false) String firstName,
+                                     @RequestParam(required = false) String lastName) {
+        return userService.searchUsers(firstName, lastName);
     }
 
     @GetMapping("/{id}")
