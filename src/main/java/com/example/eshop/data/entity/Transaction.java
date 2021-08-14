@@ -18,7 +18,7 @@ public class Transaction {
     long id;
 
     @OneToOne @JoinColumn(name = "user_id")
-    UserEntity user;
+    User user;
 
     @OneToOne @JoinColumn(name = "order_id")
     Order order;

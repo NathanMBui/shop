@@ -1,6 +1,6 @@
 package com.example.eshop.data.dto;
 
-import com.example.eshop.data.entity.UserEntity;
+import com.example.eshop.data.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,7 +28,7 @@ public class UserDTO {
     private String intro;
     private String profile;
 
-    public UserDTO(UserEntity user) {
+    public UserDTO(User user) {
         this.id = user.getId();
         this.firstName = user.getFirstName();
         this.middleName = user.getMiddleName();
@@ -44,7 +44,7 @@ public class UserDTO {
         this.profile = user.getProfile();
     }
 
-    public static Optional<UserDTO> fromOptional(Optional<UserEntity> optionalUser) {
+    public static Optional<UserDTO> fromOptional(Optional<User> optionalUser) {
         if (optionalUser.isEmpty()) {
             return Optional.empty();
         } else {

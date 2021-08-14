@@ -1,7 +1,6 @@
 package com.example.eshop.controller;
 
 import com.example.eshop.data.dto.UserDTO;
-import com.example.eshop.data.entity.UserEntity;
 import com.example.eshop.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
 

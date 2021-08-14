@@ -1,6 +1,6 @@
 package com.example.eshop.repository;
 
-import com.example.eshop.data.entity.UserEntity;
+import com.example.eshop.data.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -24,14 +24,14 @@ public class UserRepositoryTest {
     @Test
     public void testFindUserByName() {
         //given
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setFirstName("Jane");
         user.setLastName("Foster");
         user.setPasswordHash("!#4");
         entityManager.persistAndFlush(user);
 
         //when
-        Optional<UserEntity> returnUser = userRepository.findByFirstName("Jane");
+        Optional<User> returnUser = userRepository.findByFirstName("Jane");
 
         //then
         then(returnUser).isNotNull();

@@ -1,7 +1,7 @@
 package com.example.eshop.service;
 
 import com.example.eshop.data.dto.UserDTO;
-import com.example.eshop.data.entity.UserEntity;
+import com.example.eshop.data.entity.User;
 import com.example.eshop.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Optional;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -32,7 +31,7 @@ public class UserServiceTest {
     @Test
     public void testGetUserById() {
         //given
-        UserEntity user = new UserEntity();
+        User user = new User();
         given(userRepository.findById(anyLong())).willReturn(Optional.of(user));
 
         //when
@@ -49,12 +48,12 @@ public class UserServiceTest {
         int totalUser = 10;
         int pageSize = 5;
         int testingPage = 0;
-        ArrayList<UserEntity> userList = new ArrayList<>();
+        ArrayList<User> userList = new ArrayList<>();
         for (int i = 0; i < totalUser; i++) {
-            userList.add(new UserEntity());
+            userList.add(new User());
         }
         Pageable pageable = Pageable.ofSize(pageSize).withPage(testingPage);
-        Page<UserEntity> userEntityPage = new PageImpl<>(userList, pageable, totalUser);
+        Page<User> userEntityPage = new PageImpl<>(userList, pageable, totalUser);
         given(userRepository.findAll(any(Pageable.class))).willReturn(userEntityPage);
 
         //when

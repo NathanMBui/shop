@@ -25,7 +25,7 @@ public class Product {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    UserEntity user;
+    User user;
     String title;
     String metaTitle;
     String content;
