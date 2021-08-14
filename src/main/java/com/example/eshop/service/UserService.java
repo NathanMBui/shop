@@ -2,6 +2,7 @@ package com.example.eshop.service;
 
 import com.example.eshop.aspect.Loggable;
 import com.example.eshop.data.dto.UserDTO;
+import com.example.eshop.data.entity.User;
 import com.example.eshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,4 +43,7 @@ public class UserService {
         return UserDTO.fromOptional(userRepository.findById(id));
     }
 
+    public UserDTO createUser(UserDTO userDTO) {
+        return new UserDTO(userRepository.save(userDTO.toEntity()));
+    }
 }

@@ -13,15 +13,10 @@ import java.util.Optional;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class UserRepositoryTest {
+public class UserRepositoryTest extends RepositoryTestBase {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private TestEntityManager entityManager;
 
     @Test
     public void testFindUserByName() {

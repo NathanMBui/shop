@@ -44,6 +44,13 @@ public class UserDTO {
         this.profile = user.getProfile();
     }
 
+    public User toEntity() {
+        User user = new User();
+        user.setFirstName(this.firstName);
+        user.setLastName(this.lastName);
+        return user;
+    }
+
     public static Optional<UserDTO> fromOptional(Optional<User> optionalUser) {
         if (optionalUser.isEmpty()) {
             return Optional.empty();
