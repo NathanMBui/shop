@@ -1,6 +1,7 @@
 package com.example.eshop.service;
 
 import com.example.eshop.aspect.Loggable;
+import com.example.eshop.data.DataMapper;
 import com.example.eshop.data.dto.UserDTO;
 import com.example.eshop.data.entity.User;
 import com.example.eshop.repository.UserRepository;
@@ -14,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+public class UserService extends ServiceBase {
 
     @Autowired
     private UserRepository userRepository;
@@ -23,27 +24,27 @@ public class UserService {
     public List<UserDTO> getUsers() {
         return userRepository.findAll()
                 .stream()
-                .map(UserDTO::new)
+                .map(mapper::userToUserDto)
                 .collect(Collectors.toList());
     }
 
     public List<UserDTO> searchUsers(String firstName, String lastName) {
         return userRepository.findByFirstNameOrLastName(firstName, lastName)
                 .stream()
-                .map(UserDTO::new)
+                .map(mapper::userToUserDto)
                 .collect(Collectors.toList());
     }
 
     public Page<UserDTO> getUsers(Pageable pageable) {
-        return userRepository.findAll(pageable).map(UserDTO::new);
+        return userRepository.findAll(pageable).map(mapper::userToUserDto);
     }
 
     @Loggable
     public Optional<UserDTO> getUserById(long id) {
-        return UserDTO.fromOptional(userRepository.findById(id));
+        return Optional.of(mapper.userToUserDto(userRepository.findById(id).orElse(null)));
     }
 
     public UserDTO createUser(UserDTO userDTO) {
-        return new UserDTO(userRepository.save(userDTO.toEntity()));
+        return mapper.userToUserDto(userRepository.save(mapper.userDtoToUser(userDTO)));
     }
 }

@@ -27,35 +27,35 @@ public class UserDTO {
     private Date lastLogin;
     private String intro;
     private String profile;
-
-    public UserDTO(User user) {
-        this.id = user.getId();
-        this.firstName = user.getFirstName();
-        this.middleName = user.getMiddleName();
-        this.lastName = user.getLastName();
-        this.mobile = user.getMobile();
-        this.email = user.getEmail();
-        this.passwordHash = user.getPasswordHash();
-        this.isAdmin = user.isAdmin();
-        this.isVendor = user.isVendor();
-        this.registeredDate = user.getRegisteredDate();
-        this.lastLogin = user.getLastLogin();
-        this.intro = user.getIntro();
-        this.profile = user.getProfile();
-    }
-
-    public User toEntity() {
-        User user = new User();
-        user.setFirstName(this.firstName);
-        user.setLastName(this.lastName);
-        return user;
-    }
-
-    public static Optional<UserDTO> fromOptional(Optional<User> optionalUser) {
-        if (optionalUser.isEmpty()) {
-            return Optional.empty();
-        } else {
-            return Optional.of(new UserDTO(optionalUser.get()));
-        }
-    }
+//
+//    public UserDTO(User user) {
+//        this.id = user.getId();
+//        this.firstName = user.getFirstName();
+//        this.middleName = user.getMiddleName();
+//        this.lastName = user.getLastName();
+//        this.mobile = user.getMobile();
+//        this.email = user.getEmail();
+//        this.passwordHash = user.getPasswordHash();
+//        this.isAdmin = user.isAdmin();
+//        this.isVendor = user.isVendor();
+//        this.registeredDate = user.getRegisteredDate();
+//        this.lastLogin = user.getLastLogin();
+//        this.intro = user.getIntro();
+//        this.profile = user.getProfile();
+//    }
+//
+//    public User toEntity() {
+//        User user = new User();
+//        user.setFirstName(this.firstName);
+//        user.setLastName(this.lastName);
+//        return user;
+//    }
+//
+//    public static Optional<UserDTO> fromOptional(Optional<User> optionalUser) {
+//        if (optionalUser.isEmpty()) {
+//            return Optional.empty();
+//        } else {
+//            return Optional.of(new UserDTO(optionalUser.get()));
+//        }
+//    }
 }
