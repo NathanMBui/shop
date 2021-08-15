@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "order", schema = "shop")
+@Table(name = "`order`", schema = "shop")
 public class Order {
 
     @Id
