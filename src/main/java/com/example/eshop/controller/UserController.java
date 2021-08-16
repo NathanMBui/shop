@@ -14,21 +14,16 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
 @RestController
 @RequestMapping(path = "users")
-public class UserController {
+public class UserController extends ControllerBase implements UserAPI {
 
     @Autowired
     private UserService userService;
 
-//    @GetMapping
-//    public List<UserDTO> getUsers() {
-//        return userService.getUsers();
-//    }
-
     @GetMapping("")
-    Page<UserDTO> getUsersPaginate(Pageable pageable) {
+    @Override
+    public Page<UserDTO> getUsersPaginate(Pageable pageable) {
         return userService.getUsers(pageable);
     }
 
