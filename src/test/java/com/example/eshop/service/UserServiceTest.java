@@ -4,6 +4,7 @@ import com.example.eshop.data.dto.UserDTO;
 import com.example.eshop.data.entity.User;
 import com.example.eshop.repository.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -15,9 +16,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class UserServiceTest {
@@ -26,7 +28,24 @@ public class UserServiceTest {
     UserService userService;
 
     @MockBean
+    EmailService emailService;
+
+    @MockBean
     UserRepository userRepository;
+
+    @Test
+    public void testCreateUser_thenSendEmail() {
+        //given
+        User user = new User();
+        user.setFirstName("John");
+        given(userRepository.save(any())).willReturn(user);
+
+        //when
+        userService.createUser(UserDTO.builder().build());
+
+        //then
+        BDDMockito.then(emailService).should(timeout(100)).send(any());
+    }
 
     @Test
     public void testGetUserById() {

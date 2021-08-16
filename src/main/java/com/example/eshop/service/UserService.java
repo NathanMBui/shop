@@ -4,8 +4,12 @@ import com.example.eshop.aspect.Loggable;
 import com.example.eshop.data.DataMapper;
 import com.example.eshop.data.dto.UserDTO;
 import com.example.eshop.data.entity.User;
+import com.example.eshop.event.UserRegisteredEvent;
 import com.example.eshop.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,10 +19,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class UserService extends ServiceBase {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final ApplicationEventPublisher publisher;
+    private final UserRepository userRepository;
 
     @Loggable
     public List<UserDTO> getUsers() {
@@ -45,6 +50,8 @@ public class UserService extends ServiceBase {
     }
 
     public UserDTO createUser(UserDTO userDTO) {
-        return mapper.userToUserDto(userRepository.save(mapper.userDtoToUser(userDTO)));
+        UserDTO user = mapper.userToUserDto(userRepository.save(mapper.userDtoToUser(userDTO)));
+        publisher.publishEvent(new UserRegisteredEvent(user));
+        return user;
     }
 }
