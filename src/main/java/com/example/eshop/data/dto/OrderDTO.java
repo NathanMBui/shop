@@ -1,32 +1,13 @@
-package com.example.eshop.data.entity;
+package com.example.eshop.data.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
 import java.math.BigInteger;
-import java.util.Date;
-import java.util.List;
-
 
 @Data
-@Entity
-@Table(name = "`order`", schema = "shop")
-public class Order {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class OrderDTO {
     private long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
-
+    private long userId;
     private long sessionId;
     private String token;
     private Integer status;
@@ -49,6 +30,4 @@ public class Order {
     private String province;
     private String country;
     private String content;
-    private Date createdDate;
-    private Date updatedDate;
 }

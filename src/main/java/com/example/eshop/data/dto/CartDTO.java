@@ -5,24 +5,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class CartDTO {
     private long id;
+    private long sessionId;
+    private long userId;
+    private String content;
+    private String token;
+    private String status;
     private String firstName;
     private String middleName;
     private String lastName;
     private String mobile;
-    private String email;
-    private String passwordHash;
-    private boolean isAdmin;
-    private boolean isVendor;
-    private Date registeredDate;
-    private Date lastLogin;
-    private String intro;
-    private String profile;
+    private String line1;
+    private String line2;
+    private String city;
+    private String province;
+    private String country;
 }

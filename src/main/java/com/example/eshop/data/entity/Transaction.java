@@ -1,33 +1,30 @@
 package com.example.eshop.data.entity;
 
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "transaction", schema = "shop")
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private long id;
 
     @OneToOne @JoinColumn(name = "user_id")
-    User user;
+    private User user;
 
     @OneToOne @JoinColumn(name = "order_id")
-    Order order;
+    private Order order;
 
-    String content;
-    String code;
-    Integer type;
-    Integer mode;
-    Integer status;
-    Date createdDate;
-    Date updatedDate;
+    private String content;
+    private String code;
+    private Integer type;
+    private Integer mode;
+    private Integer status;
+    private Date createdDate;
+    private Date updatedDate;
 }

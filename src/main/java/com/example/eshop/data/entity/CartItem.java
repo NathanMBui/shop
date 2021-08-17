@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -34,7 +36,9 @@ public class CartItem {
     float discount;
     long quantity;
     boolean active;
-    Date createdDate;
-    Date updatedDate;
     String content;
+    @CreatedDate
+    Date createdDate;
+    @LastModifiedDate
+    Date updatedDate;
 }

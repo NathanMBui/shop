@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import org.aspectj.weaver.ast.Or;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -34,7 +36,9 @@ public class OrderItem {
     String sku;
     BigInteger price;
     Float discount;
-    Long quantity;
+    int quantity;
+    @CreatedDate
     Date createdDate;
+    @LastModifiedDate
     Date updatedDate;
 }
