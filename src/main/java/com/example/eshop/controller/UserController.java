@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -35,12 +36,17 @@ public class UserController extends ControllerBase implements UserAPI {
 
     @GetMapping("/{id}")
     public UserDTO getUser(@PathVariable("id") long id) {
-        return userService.getUserById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found"));
+        return userService.getUserById(id).orElseThrow();
     }
 
     @PostMapping
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
         return userService.createUser(userDTO);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NoSuchElementException.class)
+    public String error404(NoSuchElementException ex) {
+        return "User not found";
     }
 }
