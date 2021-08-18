@@ -27,7 +27,7 @@ public class ProductService extends ServiceBase {
         return Optional.of(mapper.productToProductDto(productRepository.findById(id).orElse(null)));
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public int updateQuantity(Product product, int amount) {
         product.setQuantity(product.getQuantity() + amount);
         product = productRepository.save(product);
