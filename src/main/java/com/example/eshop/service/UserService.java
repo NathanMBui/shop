@@ -12,6 +12,10 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +26,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserService extends ServiceBase {
 
+    private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher publisher;
     private final UserRepository userRepository;
 
@@ -53,5 +59,27 @@ public class UserService extends ServiceBase {
         UserDTO user = mapper.userToUserDto(userRepository.save(mapper.userDtoToUser(userDTO)));
         publisher.publishEvent(new UserRegisteredEvent(user));
         return user;
+    }
+
+    public Authentication signin(String username, String password) {
+        System.out.println("authen: " + username + " " + password);
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            System.out.println("authentication: " + authentication);
+            return authentication;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public Optional<UserDTO> signup(UserDTO userInfo) {
+        if (userRepository.findByEmailOrMobile(userInfo.getEmail(), userInfo.getMobile()).isPresent()) {
+            return Optional.empty();
+        }
+        User user = mapper.userDtoToUser(userInfo);
+        user.setPasswordHash(passwordEncoder.encode(userInfo.getPasswordHash()));
+        user = userRepository.save(user);
+        return Optional.of(mapper.userToUserDto(user));
     }
 }

@@ -3,8 +3,11 @@ package com.example.eshop.service;
 import com.example.eshop.data.dto.UserDTO;
 import com.example.eshop.data.entity.User;
 import com.example.eshop.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.BDDMockito;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,10 +21,10 @@ import java.util.Optional;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.timeout;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@Slf4j
 public class UserServiceTest {
 
     @Autowired
@@ -32,6 +35,9 @@ public class UserServiceTest {
 
     @MockBean
     UserRepository userRepository;
+
+    @Captor
+    ArgumentCaptor<User> userCaptor;
 
     @Test
     public void testCreateUser_thenSendEmail() {
@@ -59,6 +65,25 @@ public class UserServiceTest {
         //then
         then(optUser).isNotNull();
         then(optUser.get().getId()).isEqualTo(0L);
+    }
+
+    @Test
+    public void testSignupShouldEncryptPassword() {
+        //given
+        UserDTO userDTO = UserDTO.builder()
+                .email("tony@stark.com")
+                .passwordHash("abc123")
+                .build();
+        given(userRepository.save(any(User.class))).willReturn(new User());
+
+        //when
+        userService.signup(userDTO);
+
+        //then
+        verify(userRepository).save(userCaptor.capture());
+        String captorPassword = userCaptor.getValue().getPasswordHash();
+        then(captorPassword).isNotEqualTo("abc123");
+        log.debug("captorPassword: {}", captorPassword);
     }
 
     @Test
