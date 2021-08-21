@@ -1,0 +1,40 @@
+logging:
+    level:
+        com:
+            example:
+                eshop: TRACE
+        org:
+            hibernate:
+                engine:
+                    jdbc:
+                        env:
+                            internal:
+                                LobCreatorBuilderIpml: error
+            springframework:
+                jdbc:
+                    datasource:
+                        init:
+                            ScriptUtils: debug
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+server:
+    error:
+        include-stacktrace: never
+spring:
+    datasource:
+        password: postgres1530
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: postgres
+    jackson:
+        serialization:
+            indent_output: true
+    jpa:
+        hibernate:
+            ddl-auto: none
+            show-sql: true
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
