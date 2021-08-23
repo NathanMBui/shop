@@ -25,9 +25,9 @@ server:
         include-stacktrace: never
 spring:
     datasource:
-        password: postgres1530
-        url: jdbc:postgresql://localhost:5432/postgres
+        url: jdbc:postgresql://localhost:5431/postgres
         username: postgres
+        password: 123456
     jackson:
         serialization:
             indent_output: true

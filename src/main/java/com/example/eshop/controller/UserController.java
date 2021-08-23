@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +35,8 @@ public class UserController extends ControllerBase implements UserAPI {
     }
 
     @Override
-    @PostMapping
-    public UserDTO signup(UserDTO userInfo) {
+    @PostMapping("/signup")
+    public UserDTO signup(@RequestBody UserDTO userInfo) {
         return userService.signup(userInfo).orElseThrow(() -> new IllegalArgumentException("User exists"));
     }
 

@@ -24,7 +24,7 @@ public class UserIntegrationTest {
 
     @Test
     public void testCreateUser() throws Exception {
-        mockMvc.perform(post("/users")
+        mockMvc.perform(post("/users/signup")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"firstName\": \"Tony\", \"lastName\": \"Stark\", \"email\": \"tony@stark.com\", \"passwordHash\": \"abc123\"}"))
                 .andDo(print())
