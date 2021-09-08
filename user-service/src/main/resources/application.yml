@@ -1,0 +1,25 @@
+server:
+    port: 8081
+
+spring:
+    application:
+        name: user-service
+    datasource:
+        password: postgres1530
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: postgres
+        jackson:
+            serialization:
+                indent_output: true
+        jpa:
+            hibernate:
+                ddl-auto: none
+                show-sql: true
+            properties:
+                hibernate:
+                    dialect: org.hibernate.dialect.PostgreSQLDialect
+#eureka:
+#    client:
+#        serviceUrl:
+#            defaultZone: http://localhost:8765/eureka
+

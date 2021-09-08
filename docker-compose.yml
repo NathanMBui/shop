@@ -2,10 +2,14 @@ version: '3.9'
 services:
   api:
     container_name: api
-    build: .
+    build: /api
     ports:
       - "8080:8080"
     depends_on:
+      eureka-server:
+        condition: service_started
+      user:
+        condition: service_started
       postgres:
         condition: service_healthy
     environment:
@@ -13,6 +17,26 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=123456
       - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+  user:
+    container_name: user
+    build: /user-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      eureka-server:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=123456
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+  eureka-server:
+    container_name: eureka
+    build: /eureka-server
+    ports:
+      - "8761:8761"
   postgres:
     image: postgres
     container_name: postgres
